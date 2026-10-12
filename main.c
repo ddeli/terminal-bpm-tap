@@ -15,7 +15,7 @@ double taps[100];
 double calculated_bpm = -1.0;
 int main(void) {
 
-    printf("Tap on any key to calculate tempo\n");
+    printf("Tap multiple times on any key to calculate tempo\n");
     printf("\n");
     printf("Press \"q\" to quit\n");
 
