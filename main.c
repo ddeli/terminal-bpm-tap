@@ -13,11 +13,16 @@ int tapindex = 0;
 double taps[100];
 
 double calculated_bpm = -1.0;
+double average_bpm = 0.0;
 int main(void) {
 
+    printf("\e[1;1H\e[2J");
+    printf("\n");
     printf("Tap multiple times on any key to calculate tempo\n");
     printf("\n");
     printf("Press \"q\" to quit\n");
+    printf("\n");
+    printf("\n");
 
     while (!IS_PRESSED) {
         if (_kbhit()) { // Check if a key has been pressed
@@ -31,19 +36,38 @@ int main(void) {
 
     while (1) {
         if (_kbhit()) {
+            printf("\e[1;1H\e[2J");
+            printf("\n");
+            printf("Tap multiple times on any key to calculate tempo\n");
+            printf("\n");
+            printf("Press \"q\" to quit\n");
+            printf("\n");
+            printf("\n");
+
             char ch = _getch();
             end = clock();
 
             double calculated_bpm = 1/((double)(end - begin) / CLOCKS_PER_SEC) * 60 ;
+            taps[tapindex] = calculated_bpm;
 
-            printf("--------------- BPM : %f\n", calculated_bpm);
-            printf("--------------- TapIndex : %d\n", tapindex);
+            tapindex++;
+            for (int i = 0; i <= tapindex; i++) {
+                average_bpm = (average_bpm + taps[i]);
+            }
+            average_bpm =  average_bpm / tapindex;
+
+
+            printf("--------------- BPM : %f\n", average_bpm);
 
             end = 0;
             begin = 0;
-            tapindex++;
+
             begin = clock();
             if (ch == 113) { // 113 is the ASCII code for 'q'
+                break;
+            }
+            if (tapindex >= 99) {
+                printf("100 Taps are enough !!!\n");
                 break;
             }
         }
