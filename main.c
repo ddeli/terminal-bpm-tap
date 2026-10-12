@@ -24,6 +24,7 @@ int main(void) {
             char ch = _getch();
             begin = clock();
             IS_PRESSED = 1;
+            printf("BPM Calculation started...");
             break;
         }
     }
@@ -36,10 +37,11 @@ int main(void) {
             double calculated_bpm = 1/((double)(end - begin) / CLOCKS_PER_SEC) * 60 ;
 
             printf("--------------- BPM : %f\n", calculated_bpm);
-            printf("--------------- TapIndex : %f\n", taps[tapindex]);
+            printf("--------------- TapIndex : %d\n", tapindex);
 
             end = 0;
             begin = 0;
+            tapindex++;
             begin = clock();
             if (ch == 113) { // 113 is the ASCII code for 'q'
                 break;
