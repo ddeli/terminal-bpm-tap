@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <time.h>
 #include <conio.h>
+#include <stdlib.h>
 
 int UPPER_BOUND = 10;
 int IS_PRESSED = 0;
@@ -8,7 +9,10 @@ int IS_PRESSED = 0;
 clock_t begin;
 clock_t end;
 
-double calculated_pbm = -1.0;
+int tapindex = 0;
+double taps[100];
+
+double calculated_bpm = -1.0;
 int main(void) {
 
     printf("Tap on any key to calculate tempo\n");
@@ -17,22 +21,26 @@ int main(void) {
 
     while (!IS_PRESSED) {
         if (_kbhit()) { // Check if a key has been pressed
-            clock_t begin = clock();
+            char ch = _getch();
+            begin = clock();
             IS_PRESSED = 1;
             break;
         }
     }
+
     while (1) {
         if (_kbhit()) {
-            clock_t end = clock();
+            char ch = _getch();
+            end = clock();
 
-            double bpm_count = (double)(end - begin) / CLOCKS_PER_SEC;
-            printf("bpm_count: %f\n",bpm_count);
+            double calculated_bpm = 1/((double)(end - begin) / CLOCKS_PER_SEC) * 60 ;
 
-            printf("--------------- BPM : %d ---------------\n", "TEST");
-            clock_t begin = clock();
-            char ch = _getch(); // Get the key without echoing it
-            printf("You pressed: %d\n", ch);
+            printf("--------------- BPM : %f\n", calculated_bpm);
+            printf("--------------- TapIndex : %f\n", taps[tapindex]);
+
+            end = 0;
+            begin = 0;
+            begin = clock();
             if (ch == 113) { // 113 is the ASCII code for 'q'
                 break;
             }
