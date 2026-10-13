@@ -67,10 +67,7 @@ int main(void) {
                 end = 0;
                 begin = 0;
 
-                begin = clock();
-                if (ch == 113) { // 113 is the ASCII code for 'q'
-                    break;
-                }
+
                 if (tapindex >= 99) {
                     printf("\n");
                     printf("\n");
@@ -80,7 +77,10 @@ int main(void) {
                     break;
                 }
             }
-
+            begin = clock();
+            if (ch == 113) { // 113 is the ASCII code for 'q'
+                break;
+            }
         }
     }
 

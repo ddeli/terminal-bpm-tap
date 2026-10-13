@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 4.2)
-project(TerminalBPMTab C)
+project(TerminalBPMTap C)
 
 set(CMAKE_C_STANDARD 11)
 
-add_executable(TerminalBPMTab main.c)
+add_executable(TerminalBPMTap main.c)
